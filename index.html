@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>NoteSpace</title>
+    <meta name="description" content="NoteSpace: fast, private notes that work offline.">
+    <meta name="theme-color" content="#7c5cff">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-view="dashboard">
+
+    <!-- Icon sprite (Lucide-style, inlined so icons work offline) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-dashboard" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></symbol>
+            <symbol id="i-notes" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" /></symbol>
+            <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 17v5" /><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" /></symbol>
+            <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></symbol>
+            <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" /></symbol>
+            <symbol id="i-settings" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4" /></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14" /></symbol>
+            <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01M2 8.82a15 15 0 0 1 20 0M5 12.86a10 10 0 0 1 14 0M8.5 16.43a5 5 0 0 1 7 0" /></symbol>
+            <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.43a5 5 0 0 1 7 0M5 12.86a10 10 0 0 1 5.17-2.69M19 12.86a10 10 0 0 0-2-1.52M2 8.82a15 15 0 0 1 4.18-2.64M22 8.82a15 15 0 0 0-11.29-3.76M2 2l20 20" /></symbol>
+            <symbol id="i-edit" viewBox="0 0 24 24"><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z" /></symbol>
+            <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /></symbol>
+            <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16" /></symbol>
+            <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" /></symbol>
+            <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" /></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol>
+            <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z" /></symbol>
+        </defs>
+    </svg>
+
+    <div class="app">
+
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <div class="brand">
+                <span class="brand-mark"><svg class="i"><use href="#i-sparkles" /></svg></span>
+                <span class="brand-name">NoteSpace</span>
+                <button class="icon-btn only-mobile" id="closeMenuBtn" aria-label="Close menu"><svg class="i"><use href="#i-x" /></svg></button>
+            </div>
+
+            <nav class="nav">
+                <button class="nav-item active" data-view="dashboard"><svg class="i"><use href="#i-dashboard" /></svg><span>Dashboard</span></button>
+                <button class="nav-item" data-view="all"><svg class="i"><use href="#i-notes" /></svg><span>All Notes</span><b class="nav-count" id="navAll">0</b></button>
+                <button class="nav-item" data-view="pinned"><svg class="i"><use href="#i-pin" /></svg><span>Pinned Notes</span><b class="nav-count" id="navPinned">0</b></button>
+                <button class="nav-item" data-view="recent"><svg class="i"><use href="#i-clock" /></svg><span>Recently Edited</span></button>
+                <button class="nav-item" data-view="categories"><svg class="i"><use href="#i-folder" /></svg><span>Categories</span></button>
+                <button class="nav-item" data-view="settings"><svg class="i"><use href="#i-settings" /></svg><span>Settings</span></button>
+            </nav>
+
+            <div class="sidebar-foot">
+                <div class="status-pill" id="statusPill" data-online="true">
+                    <svg class="i"><use href="#i-wifi" id="statusIcon" /></svg>
+                    <span id="statusText">Online</span>
+                </div>
+                <button class="btn btn-soft btn-block" id="installBtn" hidden><svg class="i"><use href="#i-download" /></svg>Install app</button>
+                <p class="foot-note">Your notes live on this device and work without internet.</p>
+            </div>
+        </aside>
+        <div class="overlay" id="overlay"></div>
+
+        <!-- ============ MAIN ============ -->
+        <main class="main">
+
+            <header class="topbar">
+                <button class="icon-btn only-mobile" id="menuBtn" aria-label="Open menu"><svg class="i"><use href="#i-menu" /></svg></button>
+                <label class="search">
+                    <svg class="i"><use href="#i-search" /></svg>
+                    <input type="search" id="searchInput" placeholder="Search notes by title or content" autocomplete="off">
+                </label>
+                <div class="status-chip" id="statusChip" data-online="true"><svg class="i"><use href="#i-wifi" /></svg><span>Online</span></div>
+                <button class="btn btn-primary" id="newNoteBtn"><svg class="i"><use href="#i-plus" /></svg><span>Create New Note</span></button>
+            </header>
+
+            <!-- Dashboard hero + stats -->
+            <section class="hero" id="heroSection">
+                <div class="hero-text">
+                    <h1 id="greeting">Good Morning, Welcome Back!</h1>
+                    <p id="subtitle">Capture ideas the moment they arrive. Everything you write is saved on this device.</p>
+                </div>
+                <div class="hero-art" aria-hidden="true"><span></span><span></span><span></span></div>
+            </section>
+
+            <section class="stats" id="statsSection" aria-label="Statistics">
+                <article class="stat"><span class="stat-ico"><svg class="i"><use href="#i-notes" /></svg></span><div><strong id="statTotal">0</strong><small>Total Notes</small></div></article>
+                <article class="stat"><span class="stat-ico"><svg class="i"><use href="#i-pin" /></svg></span><div><strong id="statPinned">0</strong><small>Pinned Notes</small></div></article>
+                <article class="stat"><span class="stat-ico"><svg class="i"><use href="#i-clock" /></svg></span><div><strong id="statRecent">0</strong><small>Recently Edited</small></div></article>
+            </section>
+
+            <!-- Notes view -->
+            <section class="notes-section" id="notesSection">
+                <div class="section-head">
+                    <div>
+                        <h2 id="notesTitle">Recent notes</h2>
+                        <p id="notesCount" class="muted">0 notes</p>
+                    </div>
+                </div>
+                <div class="chips" id="categoryChips" role="tablist" aria-label="Filter by category"></div>
+                <div class="grid" id="notesGrid"></div>
+
+                <div class="empty" id="emptyState" hidden>
+                    <div class="empty-art" aria-hidden="true">
+                        <span class="sheet s1"></span><span class="sheet s2"></span>
+                        <span class="sheet s3"><i></i><i></i><i></i></span>
+                    </div>
+                    <h3 id="emptyTitle">Your space is ready</h3>
+                    <p id="emptyText">Write your first note. It saves automatically to this device.</p>
+                    <button class="btn btn-primary" id="emptyCta"><svg class="i"><use href="#i-plus" /></svg>Create your first note</button>
+                </div>
+            </section>
+
+            <!-- Settings view -->
+            <section class="settings" id="settingsSection" hidden>
+                <h2>Settings</h2>
+                <div class="setting-card">
+                    <div><h3>Back up notes</h3><p class="muted">Download all notes as a JSON file.</p></div>
+                    <button class="btn btn-soft" id="exportBtn"><svg class="i"><use href="#i-download" /></svg>Export notes</button>
+                </div>
+                <div class="setting-card">
+                    <div><h3>Restore notes</h3><p class="muted">Add notes from a NoteSpace backup file.</p></div>
+                    <label class="btn btn-soft"><svg class="i"><use href="#i-upload" /></svg>Import notes<input type="file" id="importInput" accept="application/json" hidden></label>
+                </div>
+                <div class="setting-card danger">
+                    <div><h3>Delete all notes</h3><p class="muted">Removes every note from this device. This cannot be undone.</p></div>
+                    <button class="btn btn-danger" id="clearBtn"><svg class="i"><use href="#i-trash" /></svg>Delete all</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============ NOTE EDITOR ============ -->
+    <div class="modal" id="editorModal" hidden>
+        <form class="editor" id="noteForm" data-color="lavender" novalidate>
+            <header class="editor-head">
+                <h2 id="editorHeading">New note</h2>
+                <button type="button" class="icon-btn" id="editorClose" aria-label="Close editor"><svg class="i"><use href="#i-x" /></svg></button>
+            </header>
+
+            <input type="hidden" id="noteId">
+            <input class="title-input" id="noteTitle" placeholder="Note title" maxlength="120" autocomplete="off" required>
+            <textarea class="body-input" id="noteContent" placeholder="Start writing..." rows="10"></textarea>
+
+            <div class="editor-options">
+                <label class="field">
+                    <span>Category</span>
+                    <select id="noteCategory">
+                        <option>General</option>
+                        <option>Work</option>
+                        <option>Personal</option>
+                        <option>Study</option>
+                        <option>Ideas</option>
+                    </select>
+                </label>
+
+                <fieldset class="field">
+                    <legend>Note colour</legend>
+                    <div class="swatches" id="colorPicker">
+                        <label class="swatch" data-c="lavender" title="Lavender"><input type="radio" name="noteColor" value="lavender" checked><i></i></label>
+                        <label class="swatch" data-c="rose" title="Rose"><input type="radio" name="noteColor" value="rose"><i></i></label>
+                        <label class="swatch" data-c="mint" title="Mint"><input type="radio" name="noteColor" value="mint"><i></i></label>
+                        <label class="swatch" data-c="peach" title="Peach"><input type="radio" name="noteColor" value="peach"><i></i></label>
+                        <label class="swatch" data-c="sky" title="Sky"><input type="radio" name="noteColor" value="sky"><i></i></label>
+                        <label class="swatch" data-c="lemon" title="Lemon"><input type="radio" name="noteColor" value="lemon"><i></i></label>
+                    </div>
+                </fieldset>
+
+                <label class="toggle">
+                    <input type="checkbox" id="notePinned">
+                    <span class="track"></span>
+                    <span class="toggle-label"><svg class="i"><use href="#i-pin" /></svg>Pin this note</span>
+                </label>
+            </div>
+
+            <footer class="editor-foot">
+                <small class="muted" id="wordCount">0 words</small>
+                <div class="actions">
+                    <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><svg class="i"><use href="#i-check" /></svg>Save Note</button>
+                </div>
+            </footer>
+        </form>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
