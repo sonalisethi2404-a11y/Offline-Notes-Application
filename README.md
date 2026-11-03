@@ -95,3 +95,19 @@ GitHub: [sonalisethi2404-a11y](https://github.com/sonalisethi2404-a11y)
 ---
 
 *Developed as an academic project to explore web application development and Progressive Web App technologies.*
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](dashboard.png)
+
+### All Notes
+![All Notes](all_notes.png)
+
+### Create New Note
+![Create Note](create-note.png)
+
+### Pinned Notes
+![Pinned Notes](pinned.png)
+
+### Categories
+![Categories](categories.png)
